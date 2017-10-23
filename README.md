@@ -1,21 +1,19 @@
 # Robotians
 
-**TODO: Add description**
+Robots on Mars
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `robotians` to your list of dependencies in `mix.exs`:
+1. Install Elixir
 
-```elixir
-def deps do
-  [
-    {:robotians, "~> 0.1.0"}
-  ]
-end
-```
+  Using Homebew you can use `brew install elixir` command
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/robotians](https://hexdocs.pm/robotians).
 
+2. Make sure all dependencies are fetched
+
+  `mix deps.get`
+  
+
+3. Run tests using mix command
+
+  `mix test`
