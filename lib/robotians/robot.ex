@@ -29,7 +29,7 @@ defmodule Robotians.Robot do
 
   def handle_call({:follow_instructions, instructions}, _from, state) do
     {status, new_state} = move_all(instructions, state)
-    {:reply, {status, new_state}, new_state}
+    {:reply, {status, new_state.position}, new_state}
   end
 
   # private
@@ -45,13 +45,27 @@ defmodule Robotians.Robot do
     end
   end
 
-  defp move_one(instruction, state=%{size: size, position: current_position}) do
+  # when going to move off grid from scented coordinate
+  defp move_one("F", state=%{position: current_position}) do
+    if Enum.member?(Mars.scented_coordinates, current_position) do
+      {:ok, state}
+    else
+      calculate_new_position("F", state)
+    end
+  end
+
+  # any instruction other than moving off grid from scented coordinate
+  defp move_one(instruction, state) do
+    calculate_new_position(instruction, state)
+  end
+
+  defp calculate_new_position(instruction, state=%{size: size, position: current_position}) do
     new_position = PositionCalculator.calculate(instruction, current_position)
 
     case PositionCalculator.outside_grid?(size, new_position) do
       false ->
         {:ok, %{state|position: new_position}}
-      true -> 
+      true ->
         {:lost, state}
     end
   end

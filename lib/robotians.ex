@@ -8,18 +8,18 @@ defmodule Robotians do
 
   # Client
 
-  def setup_world(size) do
+  def setup_mars(size) do
     Mars.start_link(size)
   end
 
-  def create_robot(start_position) do
+  def place_new_robot(start_position) do
     Robot.start_link(start_position)
   end
 
   def move_robot(pid, instructions) do
     case Robot.follow_instructions(pid, instructions) do
       {:lost, position} ->
-        report_lost_robot
+        report_lost_robot(pid, position)
         {:lost, position}
       {:ok, position} ->
         {:ok, position}
