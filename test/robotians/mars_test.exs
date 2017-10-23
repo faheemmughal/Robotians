@@ -3,7 +3,7 @@ defmodule Robotians.MarsTest do
   alias Robotians.Mars
 
   setup do
-    {:ok, mars} = Mars.start(%{x: 5, y: 5})
+    {:ok, mars} = Mars.start_link(%{x: 5, y: 5})
     %{mars: mars}
   end
 

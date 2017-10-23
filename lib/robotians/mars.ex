@@ -8,7 +8,7 @@ defmodule Robotians.Mars do
 
   # Client
 
-  def start(size) do
+  def start_link(size) do
     Agent.start_link(fn ->
         %{
           size: size,
